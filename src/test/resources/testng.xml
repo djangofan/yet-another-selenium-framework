@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Test Suite" verbose="5" parallel="classes"	thread-count="2">
+	<parameter name="configFile" value="src/test/resources/config.properties" />
+	<listeners>
+		<listener class-name="com.saucelabs.testng.SauceOnDemandTestListener"/>
+		<listener class-name="org.uncommons.reportng.HTMLReporter"/>
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+	</listeners>
+	<test name="Test1">
+		<parameter name="browser" value="chrome" />
+		<parameter name="platform" value="Windows 8" />
+		<parameter name="browserVersion" value="44" />
+		<classes>
+			<class name="qa.se.tests.ShootoutTest" />
+		</classes>
+	</test>
+</suite>
