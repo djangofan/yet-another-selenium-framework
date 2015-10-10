@@ -2,6 +2,8 @@ sparq-selenium-framework
 ======================
 Selenium test framework in Java, using 'TestNG' as a threaded test runner, and browsers executing within SauceLabs.
 
+STILL IN DEVELOPMENT, NOT QUITE FINISHED
+
 ## Requirements
 
 Provide a `src/test/resources/config.properties` containing these two properties:  `sauceUser` and `sauceKey`
