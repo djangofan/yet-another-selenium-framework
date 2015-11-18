@@ -60,9 +60,15 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>2.24</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.saucelabs</groupId>
             <artifactId>saucerest</artifactId>
-            <version>1.0.27</version>
+            <version>1.0.28</version>
         </dependency>
         <dependency>
             <groupId>com.saucelabs</groupId>
@@ -96,46 +102,26 @@
             <artifactId>mockito-core</artifactId>
             <version>1.10.19</version>
         </dependency>
-        <!--
-            Core utilities used by other modules.
-            Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)
-        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-        <!--
-            Expression Language (depends on spring-core)
-            Define this if you use Spring Expression APIs (org.springframework.expression.*)
-        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-        <!--
-            Bean Factory and JavaBeans utilities (depends on spring-core)
-            Define this if you use Spring Bean APIs (org.springframework.beans.*)
-        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-        <!--
-            Aspect Oriented Programming (AOP) Framework (depends on spring-core, spring-beans)
-            Define this if you use Spring AOP APIs (org.springframework.aop.*)
-        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-        <!--
-            Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
-            This is the central artifact for Spring's Dependency Injection Container and is generally always defined
-        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>

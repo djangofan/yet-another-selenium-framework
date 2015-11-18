@@ -4,38 +4,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 /**
- * Created by austenjt on 8/29/2015.
+ * Selenium enabled test base.
  */
-public class ShootoutSuiteTestBase extends SuiteTestBase
+public class SauceLabsTestBase extends TestNGSuiteTestBase
 {
-    public ShootoutHelper shootoutHelper;
+    protected ShootoutHelper shootoutHelper;
 
-    protected ShootoutSuiteTestBase()
+    public SauceLabsTestBase()
     {
         shootoutHelper = new ShootoutHelper();
-    }
-
-    /**
-     * Setup before each test.
-     *
-     * @param params is a reference to the parameters of the current test method
-     * @throws Exception thrown if any errors occur in the creation of the WebDriver instance
-     */
-    @BeforeMethod
-    public void setUp(Object[] params) {
-        WebDriver driver = (WebDriver) params[0];
-        driver.get("http://tutorialapp.saucelabs.com");
+        Reporter.log("Initialized test class: " + this.getClass().getName());
     }
 
     /**
@@ -45,15 +31,15 @@ public class ShootoutSuiteTestBase extends SuiteTestBase
      * Platform reference:
      * https://code.google.com/p/selenium/source/browse/java/client/src/org/openqa/selenium/Platform.java
      */
-    @DataProvider(name = "assembleTestParams", parallel = true)
+    @DataProvider(name = "sauceTestParams", parallel = true)
     public Object[][] assembleTestParams(ITestContext context, Method method) {
         WebDriver driver = null;
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(CapabilityType.BROWSER_NAME, context.getCurrentXmlTest().getParameter("browser"));
         caps.setCapability(CapabilityType.VERSION, context.getCurrentXmlTest().getParameter("browserVersion"));
         caps.setCapability(CapabilityType.PLATFORM, context.getCurrentXmlTest().getParameter("platform"));
-        String testIdentifier = this.getClass().getSimpleName() + "-" + method.getName();
-        caps.setCapability("name", testIdentifier);
+        String testName = this.getClass().getSimpleName() + "-" + method.getName();
+        caps.setCapability("name", testName);
         caps.setCapability("tags", context.getCurrentXmlTest().getParameter("browser"));
         caps.setCapability("build", System.getProperty(BUILD_TAG, "unspecified"));
         caps.setCapability("captureHtml", Boolean.TRUE);
@@ -64,18 +50,7 @@ public class ShootoutSuiteTestBase extends SuiteTestBase
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return new Object[][]{{driver, testIdentifier}};
-    }
-
-    @AfterMethod
-    public void tearDown(Object[] params) {
-        WebDriver driver = (WebDriver) params[0];
-        try {
-            Sleeper.SYSTEM_SLEEPER.sleep(new org.openqa.selenium.support.ui.Duration(5, TimeUnit.SECONDS));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        driver.quit();
+        return new Object[][]{{driver, testName}};
     }
 
 }

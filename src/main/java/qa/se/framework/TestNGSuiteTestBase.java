@@ -20,7 +20,7 @@ import java.util.Properties;
  *
  * This TestBase requires you define a DataProvider called assembleTestParams.
  */
-public abstract class SuiteTestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
+public abstract class TestNGSuiteTestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     protected static final String BUILD_TAG = "BUILD_TAG";
     protected SauceOnDemandAuthentication authentication;
